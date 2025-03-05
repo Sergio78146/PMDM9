@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
+import java.util.Locale;
+
 
 public class EditarPedidoActivity extends AppCompatActivity {
 
@@ -22,6 +24,7 @@ public class EditarPedidoActivity extends AppCompatActivity {
     private Button btnGuardarCambios;
     private int idPedido;
     private JSONArray tiendas;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +44,14 @@ public class EditarPedidoActivity extends AppCompatActivity {
         String fechaPedido = getIntent().getStringExtra("fechaPedido");
         String fechaEstimada = getIntent().getStringExtra("fechaEstimada");
         String descripcion = getIntent().getStringExtra("descripcion");
-        String importe = getIntent().getStringExtra("importe");
+        double importe = getIntent().getDoubleExtra("importe", 0.0); // Obtener el importe como double
         boolean estado = getIntent().getBooleanExtra("estado", false);
 
         // Display data in the input fields
         editTextFechaPedido.setText(fechaPedido);
         editTextFechaEstimada.setText(fechaEstimada);
         editTextDescripcion.setText(descripcion);
-        editTextImporte.setText(importe);
+        editTextImporte.setText(String.format(Locale.US, "%.2f", importe)); // Usar Locale.US para forzar el punto decimal
         checkBoxEstado.setChecked(estado);
 
         // Load stores
@@ -87,6 +90,7 @@ public class EditarPedidoActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void cargarTiendasEnSpinner() {
         String[] nombresTiendas = new String[tiendas.length()];
