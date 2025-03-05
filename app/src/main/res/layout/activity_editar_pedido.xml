@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextFechaPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha del Pedido" />
+
+    <EditText
+        android:id="@+id/editTextFechaEstimada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha Estimada de Entrega" />
+
+    <EditText
+        android:id="@+id/editTextDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción" />
+
+    <EditText
+        android:id="@+id/editTextImporte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Importe"
+        android:inputType="numberDecimal" />
+
+    <Spinner
+        android:id="@+id/spinnerTiendas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/checkBoxEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recibido" />
+
+    <Button
+        android:id="@+id/btnGuardarCambios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar Cambios"
+        android:layout_gravity="end" />
+</LinearLayout>

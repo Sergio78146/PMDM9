@@ -1,0 +1,31 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">MisPedidosPendientes</string>
+
+    <!-- Main Activity Strings -->
+    <string name="pedidos_pendientes">Pedidos Pendientes</string>
+    <string name="btn_nuevo_pedido">Nuevo Pedido</string>
+    <string name="btn_tiendas">Tiendas</string>
+
+    <!-- Tiendas Activity Strings -->
+    <string name="tiendas">Tiendas</string>
+    <string name="btn_nueva_tienda">Nueva Tienda</string>
+
+    <!-- Nuevo Pedido Activity Strings -->
+    <string name="nuevo_pedido">Nuevo Pedido</string>
+    <string name="fecha_estimada_entrega">Fecha Estimada de Entrega</string>
+    <string name="descripcion">Descripción</string>
+    <string name="importe">Importe</string>
+    <string name="btn_guardar_pedido">Guardar Pedido</string>
+
+    <!-- Nueva Tienda Activity Strings -->
+    <string name="nueva_tienda">Nueva Tienda</string>
+    <string name="nombre_tienda">Nombre de la Tienda</string>
+    <string name="btn_guardar_tienda">Guardar Tienda</string>
+
+    <!-- Confirmation Dialog Strings -->
+    <string name="confirm_delete_pedido">¿Seguro de Borrar el Pedido № %1$d?</string>
+    <string name="confirm_delete_tienda">¿Seguro de Borrar la Tienda %1$s?</string>
+    <string name="btn_aceptar">Aceptar</string>
+    <string name="btn_cancelar">Cancelar</string>
+</resources>

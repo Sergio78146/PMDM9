@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <!-- Título de Pedidos Pendientes -->
+    <TextView
+        android:id="@+id/textViewPedidosPendientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pedido pendiente"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Imagen pequeña -->
+    <ImageView
+        android:id="@+id/imageViewPedido"
+        android:layout_width="90dp"
+        android:layout_height="78dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="Imagen de pedido pendiente"
+        android:src="@drawable/pedido" />
+
+    <!-- Contenedor para cada pedido -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/textViewTienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tienda: "
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewNombreTienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/textViewImporteLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Importe: "
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/textViewImporte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/textViewFechaEstimadaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha Estimada: "
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/textViewFechaEstimada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/textViewEstadoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado: "
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/textViewEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/textViewDescripcionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción: "
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/textViewDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" />
+
+        <!-- Divider or Space -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray" />
+    </LinearLayout>
+</LinearLayout>
