@@ -1,3 +1,4 @@
+
 package es.studium.pmdm9;
 
 import android.os.Bundle;
@@ -7,9 +8,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.time.LocalDate;
 
 public class NuevoPedidoActivity extends AppCompatActivity {
 
@@ -30,8 +35,8 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         editTextDescripcion = findViewById(R.id.editTextDescripcion);
         editTextImporte = findViewById(R.id.editTextImporte);
         spinnerTiendas = findViewById(R.id.spinnerTiendas);
-        checkBoxEstado = findViewById(R.id.checkBoxEstado);
         btnGuardarPedido = findViewById(R.id.btnGuardarPedido);
+        LocalDate fecha = LocalDate.now();
 
         // Cargar tiendas
         AccesoRemoto accesoRemoto = new AccesoRemoto(this);
@@ -42,8 +47,9 @@ public class NuevoPedidoActivity extends AppCompatActivity {
             String fechaEstimada = editTextFechaEstimada.getText().toString();
             String descripcion = editTextDescripcion.getText().toString();
             String importeTexto = editTextImporte.getText().toString();
+            String fechaHoy = String.valueOf(fecha);
             int idTiendaFK = obtenerIdTiendaSeleccionada();
-            int estado = checkBoxEstado.isChecked() ? 1 : 0;
+
 
             if (fechaEstimada.isEmpty() || descripcion.isEmpty() || importeTexto.isEmpty() || idTiendaFK == -1) {
                 Toast.makeText(this, "Por favor, complete todos los campos correctamente.", Toast.LENGTH_LONG).show();
@@ -59,7 +65,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
             }
 
             AltaRemota altaRemota = new AltaRemota(this);
-            String error = altaRemota.darAltaPedido(fechaEstimada, descripcion, importe, idTiendaFK, estado);
+            String error = altaRemota.darAltaPedido(fechaHoy, fechaEstimada, descripcion, importe, idTiendaFK);
 
             if (error == null) {
                 Toast.makeText(this, "Éxito: Pedido creado exitosamente", Toast.LENGTH_LONG).show();

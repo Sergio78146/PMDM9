@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+
 import java.io.IOException;
+
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,17 +21,18 @@ public class AltaRemota {
         this.context = context;
     }
 
-    public String darAltaPedido(String fechaEstimada, String descripcionPedido, double importePedido, int idTienda, int estadoPedido) {
-        return ejecutarSolicitud("pedidos.php",
-                "descripcionPedido", descripcionPedido,
+    public String darAltaPedido(String fechaPedido, String fechaEstimada, String descripcionPedido, double importePedido, int idTienda) {
+        return ejecutarSolicitud("Pedidos.php",
+                "fechaPedido", fechaPedido,
                 "fechaEstimadaPedido", fechaEstimada,
+                "descripcionPedido", descripcionPedido,
                 "importePedido", String.valueOf(importePedido),
-                "idTiendaFK", String.valueOf(idTienda),
-                "estadoPedido", String.valueOf(estadoPedido));
+                "idTiendaFK", String.valueOf(idTienda));
     }
 
+
     public String darAltaTienda(String nombreTienda) {
-        return ejecutarSolicitud("tiendas.php", "nombreTienda", nombreTienda);
+        return ejecutarSolicitud("Tiendas.php", "nombreTienda", nombreTienda);
     }
 
     private String ejecutarSolicitud(String endpoint, String... params) {
@@ -40,13 +43,12 @@ public class AltaRemota {
         RequestBody formBody = formBodyBuilder.build();
 
         Request request = new Request.Builder()
-                .url("http://" + Constants.SERVER_IP + "/API_PMDM/" + endpoint)
+                .url("http://" + Constants.SERVER_IP + "/API/" + endpoint)
                 .post(formBody)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
-                // Check if the response body is empty or contains an error message
                 String responseBody = response.body().string();
                 if (responseBody.isEmpty() || responseBody.contains("error")) {
                     String errorMessage = "Error en la respuesta del servidor: " + response.code() + " - " + responseBody;
@@ -67,7 +69,6 @@ public class AltaRemota {
             mostrarDialogoError(errorMessage);
             return errorMessage;
         } catch (Exception e) {
-            // Catch any other unexpected exceptions
             String errorMessage = "Error inesperado: " + e.getMessage();
             Log.e("AltaRemota", errorMessage);
             mostrarDialogoError(errorMessage);
@@ -82,6 +83,4 @@ public class AltaRemota {
                 .setPositiveButton("Aceptar", null)
                 .show();
     }
-
-
 }

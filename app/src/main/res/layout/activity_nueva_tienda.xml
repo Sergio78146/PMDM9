@@ -9,12 +9,12 @@
         android:id="@+id/editTextNombreTienda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre de la Tienda"/>
+        android:hint="Nombre de la Tienda" />
 
     <Button
         android:id="@+id/btnGuardarTienda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar Tienda"
-        android:layout_gravity="end"/>
+        android:layout_gravity="end"
+        android:text="Guardar Tienda" />
 </LinearLayout>

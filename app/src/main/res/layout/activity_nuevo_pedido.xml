@@ -9,36 +9,30 @@
         android:id="@+id/editTextFechaEstimada"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Fecha Estimada de Entrega"/>
+        android:hint="Fecha Estimada de Entrega" />
 
     <EditText
         android:id="@+id/editTextDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descripción"/>
+        android:hint="Descripción" />
 
     <EditText
         android:id="@+id/editTextImporte"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Importe"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal" />
 
     <Spinner
         android:id="@+id/spinnerTiendas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <CheckBox
-        android:id="@+id/checkBoxEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recibido"/>
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnGuardarPedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar Pedido"
-        android:layout_gravity="end"/>
+        android:layout_gravity="end"
+        android:text="Guardar Pedido" />
 </LinearLayout>

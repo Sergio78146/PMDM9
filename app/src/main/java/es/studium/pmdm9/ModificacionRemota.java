@@ -2,16 +2,18 @@ package es.studium.pmdm9;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import java.io.IOException;
-import okhttp3.FormBody;
+import android.widget.Toast;
+
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import java.io.IOException;
 
 public class ModificacionRemota {
     private OkHttpClient client = new OkHttpClient();
@@ -22,7 +24,7 @@ public class ModificacionRemota {
     }
 
     public boolean modificarPedido(int idPedido, String fechaPedido, String fechaEstimada, String descripcionPedido, double importePedido, int estadoPedido, int idTienda) {
-        String responseBody = ejecutarSolicitud("pedidos.php",
+        String responseBody = ejecutarSolicitud("Pedidos.php",
                 "idPedido", String.valueOf(idPedido),
                 "fechaPedido", fechaPedido,
                 "fechaEstimadaPedido", fechaEstimada,
@@ -32,101 +34,95 @@ public class ModificacionRemota {
                 "idTiendaFK", String.valueOf(idTienda));
 
         if (responseBody != null) {
-            mostrarLogsServidor("Respuesta del Servidor (Pedido)", responseBody);
-            return true;
+
+            if (responseBody.contains("error")) {
+                mostrarToast("Error al modificar el pedido. Verifique los datos.");
+                return false;
+            } else {
+                mostrarToast("Pedido modificado correctamente.");
+                return true;
+            }
         } else {
+            mostrarToast("No se recibió respuesta del servidor.");
             return false;
         }
     }
 
     public boolean modificarTienda(int idTienda, String nombreTienda) {
-        String responseBody = ejecutarSolicitud("tiendas.php",
+        String responseBody = ejecutarSolicitud("Tiendas.php",
                 "idTienda", String.valueOf(idTienda),
                 "nombreTienda", nombreTienda);
 
         if (responseBody != null) {
-            mostrarLogsServidor("Respuesta del Servidor (Tienda)", responseBody);
-            return true;
+            if (responseBody.contains("error")) {
+                mostrarToast("Error al modificar la tienda. Verifique los datos.");
+                return false;
+            } else {
+                mostrarToast("Tienda modificada correctamente.");
+                return true;
+            }
         } else {
+            mostrarToast("No se recibió respuesta del servidor.");
             return false;
         }
     }
 
     private String ejecutarSolicitud(String endpoint, String... params) {
-        FormBody.Builder formBodyBuilder = new FormBody.Builder();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://" + Constants.SERVER_IP + "/API/" + endpoint).newBuilder();
         for (int i = 0; i < params.length; i += 2) {
-            formBodyBuilder.add(params[i], params[i + 1]);
+            urlBuilder.addQueryParameter(params[i], params[i + 1]);
         }
-        RequestBody formBody = formBodyBuilder.build();
+        String url = urlBuilder.build().toString();
+
+        Log.d("ModificacionRemota", "URL construida: " + url);
 
         Request request = new Request.Builder()
-                .url("http://" + Constants.SERVER_IP + "/API_PMDM/" + endpoint)
-                .put(formBody)
+                .url(url)
+                .put(RequestBody.create(null, new byte[0]))
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 String responseBody = response.body().string();
-                if (responseBody.isEmpty() || responseBody.contains("error")) {
-                    String errorMessage = "Error en la respuesta del servidor: " + response.code() + " - " + responseBody;
-                    Log.e("ModificacionRemota", errorMessage);
-                    mostrarDialogoError(errorMessage);
-                    return null;
-                }
                 Log.d("ModificacionRemota", "Respuesta del servidor: " + responseBody);
                 return responseBody;
             } else {
-                String errorMessage = "Error en la respuesta del servidor: " + response.code() + " - " + response.message();
-                Log.e("ModificacionRemota", errorMessage);
-                mostrarDialogoError(errorMessage);
+                mostrarToast("Error en la respuesta del servidor: " + response.code() + " - " + response.message());
                 return null;
             }
         } catch (IOException e) {
-            String errorMessage = "Error de conexión: " + e.getMessage();
-            Log.e("ModificacionRemota", errorMessage);
-            mostrarDialogoError(errorMessage);
-            return null;
-        } catch (Exception e) {
-            // Catch any other unexpected exceptions
-            String errorMessage = "Error inesperado: " + e.getMessage();
-            Log.e("ModificacionRemota", errorMessage);
-            mostrarDialogoError(errorMessage);
+            mostrarToast("Error de conexión: " + e.getMessage());
             return null;
         }
     }
 
-    private void mostrarDialogoError(String mensaje) {
-        new AlertDialog.Builder(context)
-                .setTitle("Error")
-                .setMessage(mensaje)
-                .setPositiveButton("Aceptar", null)
-                .show();
+    private void mostrarToast(String mensaje) {
+        if (context instanceof android.app.Activity) {
+            ((android.app.Activity) context).runOnUiThread(() ->
+                    Toast.makeText(context, mensaje, Toast.LENGTH_LONG).show());
+        }
     }
 
     private void mostrarLogsServidor(String titulo, String logs) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(titulo);
+        if (context instanceof android.app.Activity) {
+            ((android.app.Activity) context).runOnUiThread(() -> {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle(titulo);
 
-        // Create a TextView to display the logs
-        TextView textView = new TextView(context);
-        textView.setText(logs);
-        textView.setTextSize(14);
-        textView.setPadding(20, 20, 20, 20);
+                TextView textView = new TextView(context);
+                textView.setText(logs);
+                textView.setTextSize(14);
+                textView.setPadding(20, 20, 20, 20);
 
-        // Use a ScrollView to allow scrolling if the logs are long
-        ScrollView scrollView = new ScrollView(context);
-        scrollView.addView(textView);
+                ScrollView scrollView = new ScrollView(context);
+                scrollView.addView(textView);
 
-        builder.setView(scrollView);
+                builder.setView(scrollView);
+                builder.setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss());
 
-        builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            });
+        }
     }
 }

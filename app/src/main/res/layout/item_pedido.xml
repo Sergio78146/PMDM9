@@ -10,29 +10,20 @@
         android:id="@+id/textViewPedidosPendientes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pedido pendiente"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_marginBottom="8dp" />
-
-    <!-- Imagen pequeña -->
-    <ImageView
-        android:id="@+id/imageViewPedido"
-        android:layout_width="90dp"
-        android:layout_height="78dp"
-        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="8dp"
-        android:contentDescription="Imagen de pedido pendiente"
-        android:src="@drawable/pedido" />
+        android:text="Pedido pendiente"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <!-- Contenedor para cada pedido -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="?attr/selectableItemBackground"
+        android:orientation="vertical"
         android:padding="8dp">
 
+        <!-- Tienda -->
         <TextView
             android:id="@+id/textViewTienda"
             android:layout_width="wrap_content"
@@ -40,64 +31,61 @@
             android:text="Tienda: "
             android:textStyle="bold" />
 
+        <!-- Nombre de la Tienda -->
         <TextView
-            android:id="@+id/textViewNombreTienda"
+            android:id="@+id/textViewNombreTiendaValor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp" />
 
+        <!-- Importe -->
         <TextView
             android:id="@+id/textViewImporteLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Importe: "
-            android:textStyle="bold"
-            android:layout_marginTop="8dp" />
+            android:textStyle="bold" />
 
+        <!-- Importe del Pedido -->
         <TextView
-            android:id="@+id/textViewImporte"
+            android:id="@+id/textViewImporteValor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp" />
 
+        <!-- Fecha Estimada -->
         <TextView
             android:id="@+id/textViewFechaEstimadaLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Fecha Estimada: "
-            android:textStyle="bold"
-            android:layout_marginTop="8dp" />
+            android:textStyle="bold" />
 
+        <!-- Fecha Estimada del Pedido -->
         <TextView
-            android:id="@+id/textViewFechaEstimada"
+            android:id="@+id/textViewFechaEstimadaValor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp" />
 
-        <TextView
-            android:id="@+id/textViewEstadoLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Estado: "
-            android:textStyle="bold"
-            android:layout_marginTop="8dp" />
+        <!-- Estado -->
 
-        <TextView
-            android:id="@+id/textViewEstado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp" />
+        <!-- Estado del Pedido -->
 
+        <!-- Descripción -->
         <TextView
             android:id="@+id/textViewDescripcionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Descripción: "
-            android:textStyle="bold"
-            android:layout_marginTop="8dp" />
+            android:textStyle="bold" />
 
+        <!-- Descripción del Pedido -->
         <TextView
-            android:id="@+id/textViewDescripcion"
+            android:id="@+id/textViewDescripcionValor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp" />

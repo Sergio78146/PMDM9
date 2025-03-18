@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class EditarTiendaActivity extends AppCompatActivity {
@@ -38,6 +39,7 @@ public class EditarTiendaActivity extends AppCompatActivity {
             boolean exito = modificacionRemota.modificarTienda(idTienda, nuevoNombre);
 
             if (exito) {
+
                 Toast.makeText(this, "Éxito: Tienda modificada exitosamente", Toast.LENGTH_LONG).show();
                 finish();
             }

@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -78,7 +80,8 @@ public class TiendaAdapter extends RecyclerView.Adapter<TiendaAdapter.TiendaView
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(titulo)
                 .setMessage(mensaje)
-                .setPositiveButton("Aceptar", (dialog, id) -> {});
+                .setPositiveButton("Aceptar", (dialog, id) -> {
+                });
         builder.create().show();
     }
 

@@ -7,9 +7,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import java.util.Locale;
 
 
@@ -45,7 +48,7 @@ public class EditarPedidoActivity extends AppCompatActivity {
         String fechaEstimada = getIntent().getStringExtra("fechaEstimada");
         String descripcion = getIntent().getStringExtra("descripcion");
         double importe = getIntent().getDoubleExtra("importe", 0.0); // Obtener el importe como double
-        boolean estado = getIntent().getBooleanExtra("estado", false);
+        boolean estado = getIntent().getBooleanExtra("estado", true);
 
         // Display data in the input fields
         editTextFechaPedido.setText(fechaPedido);
@@ -87,6 +90,8 @@ public class EditarPedidoActivity extends AppCompatActivity {
             if (exito) {
                 Toast.makeText(this, "Éxito: Pedido modificado exitosamente", Toast.LENGTH_LONG).show();
                 finish();
+
+
             }
         });
     }

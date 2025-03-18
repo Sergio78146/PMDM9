@@ -45,6 +45,6 @@
         android:id="@+id/btnGuardarCambios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar Cambios"
-        android:layout_gravity="end" />
+        android:layout_gravity="end"
+        android:text="Guardar Cambios" />
 </LinearLayout>
